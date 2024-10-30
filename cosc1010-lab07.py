@@ -1,12 +1,13 @@
-# Your Name Here
+# Ethan Hankel
 # UWYO COSC 1010
-# Submission Date
-# Lab XX
+# Submission Date: 10/29/24
+# Lab 7
 # Lab Section: 
 # Sources, people worked with, help given to: 
-# your
-# comments
-# here
+# I worked with the User input while loops, and the function power points
+# Then I would use Chat GPT for when my code would not work
+
+
 
 
 # Prompt the user for an upper bound 
@@ -17,9 +18,30 @@
     # If a user did not enter a number output a statement saying so
 # You will continue to prompt the user until a proper integer value is entered
 
-factorial = 1
+import math
 
-print(f"The result of the factorial based on the given bound is {factorial}")
+def int_check(value):
+    try:
+        int_value = int(value)
+        return int_value
+    except ValueError:
+            return False
+
+while True:
+    m = input("Enter number, or enter 'exit' to stop:")
+    if m.lower() == 'exit':
+        break
+    
+    m = int_check(m)
+    if m is not False and m > 0:
+         factorial = math.factorial(m)
+         print(f"The factorial of {m} is {factorial}")
+         break
+    elif m == 0:
+         print("Please enter a number greater than 0!")
+    else:
+         print("Invalid input. Please enter a positive number...")
+
 
 print("*"*75)
 # Create a while loop that prompts a user for input of an integer values
@@ -39,7 +61,20 @@ print("*"*75)
 
 num_sum = 0 
 
-print(f"Your final sum is {num_sum}")
+while True:
+     number_input = input("Enter a number to add to the sum (or type 'exit' to end): ")
+     if number_input.lower() == "exit":
+        break
+     
+
+     if number_input.lstrip('-').isdigit():
+          num_sum += int(number_input)
+     else:
+          print("invalid input. Enter a number or 'exit' to finish.")
+
+
+
+print(f"Your final sum is: {num_sum}")
 
 print("*"*75)
 # Now you will be creating a two operand calculator
@@ -59,4 +94,43 @@ print("*"*75)
 # Print the result of the equation
 # Again, loop through prompting the user for input until `exit` in any casing is input 
 
-        
+
+
+def calculate(expression):
+     expression = expression.replace(" ", "")
+     
+     operators = ['+', '-', '/', '*', '%']
+
+     for op in operators:
+        if op in expression:
+             operands = expression.split(op)
+             if len(operands) == 2:
+                if operands[0].isdigit() and operands[1].isdigit():
+                    num1, num2 = int(operands[0]), int(operands[1])
+
+                    if op == '+':
+                         return num1 + num2
+                    elif op == '-':
+                         return num1 - num2
+                    elif op == '*':
+                         return num1 * num2
+                    elif op == '/':
+                         if num2 == 0:
+                              return "Error: Division by 0"
+                         return num1 / num2
+                    elif op == '%':
+                         return num1 % num2
+                else:
+                     return "Invalid format"
+     return "Invalid operation"
+
+
+while True: 
+     number_input = input("Enter an Expression or type 'exit' to stop:")
+
+     if number_input.lower() == "exit":
+          break
+     
+     result = calculate(number_input)
+     print(f"Answer: {result}")
+     
